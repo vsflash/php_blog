@@ -49,7 +49,9 @@ class Controller_News extends Controller {
 //        Route::redirect('/news');
     }
 
-
+    /**
+     * Add comment
+     */
     public function action_add_comment() {
         var_dump($_POST);
         $news_id = $_POST['news_id'];

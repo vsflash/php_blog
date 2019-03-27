@@ -27,6 +27,9 @@ class Model_News extends Model {
         return false;
     }
 
+    /**Get 5 most commented news
+     * @return array|bool
+     */
     public function get_most_commented_news() {
         $query = 'select * from php_blog.news left join(SELECT news_id, count(news_id) as count_comm 
           FROM php_blog.comments group by news_id) b
@@ -39,6 +42,9 @@ class Model_News extends Model {
         return false;
     }
 
+    /**Get news count comm
+     * @return array
+     */
     public function get_all_news_with_count_comments() {
         $arr_news = $this->get_all_news();
         $new_arr_news = [];
