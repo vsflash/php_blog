@@ -27,7 +27,7 @@ class Model_Comment extends Model {
     }
 
     public function get_news_count_comments($news_id) {
-        $query = 'select count(id) from ' . $this->comment_table . ' where news_id=' . $news_id[0];
+        $query = 'select count(id) from ' . $this->comment_table . ' where news_id=' . $news_id;
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         if ($result = $stmt->fetch()) {

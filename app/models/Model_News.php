@@ -8,7 +8,6 @@ use app\models\Model_Comment;
 class Model_News extends Model {
     protected $news_table = 'news';
 
-//    protected $orders_table = 'orders';
 
     public function __construct() {
         parent::__construct();
@@ -18,7 +17,7 @@ class Model_News extends Model {
      * @return array|bool
      */
     public function get_all_news() {
-        $query = 'select * from ' . $this->news_table;
+        $query = 'select * from ' . $this->news_table . ' order by id desc';
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         if ($result = $stmt->fetchAll()) {
@@ -51,7 +50,11 @@ class Model_News extends Model {
         $model_comment = new Model_Comment();
         foreach ($arr_news as $news) {
             $count_comments = $model_comment->get_news_count_comments($news['id']);
-            $news['count_comments'] = $count_comments['count(id)'];
+            if (!empty($count_comments['count(id)'])) {
+                $news['count_comments'] = $count_comments['count(id)'];
+            } else {
+                $news['count_comments'] = 0;
+            }
             array_push($new_arr_news, $news);
         }
         return $new_arr_news;
