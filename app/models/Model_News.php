@@ -2,12 +2,18 @@
 
 namespace app\models;
 
+use app\core\Db;
 use app\core\Model;
-use app\models\Model_Comment;
 
 class Model_News extends Model
 {
-    protected $table = 'news';
+    /**
+     * @return string
+     */
+    public static function tableName()
+    {
+        return 'news';
+    }
 
     /**
      * Model_News constructor.
@@ -23,7 +29,7 @@ class Model_News extends Model
      */
     public function get_all_news()
     {
-        $query = 'SELECT * FROM ' . $this->table . ' ORDER BY id DESC';
+        $query = 'SELECT * FROM ' . self::tableName() . ' ORDER BY id DESC';
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         if ($result = $stmt->fetchAll()) {
@@ -39,8 +45,8 @@ class Model_News extends Model
      */
     public function get_most_commented_news()
     {
-        $query = 'SELECT * FROM php_blog.news LEFT JOIN(SELECT news_id, count(news_id) AS count_comm 
-          FROM php_blog.comments GROUP BY news_id) b
+        $query = 'SELECT * FROM news LEFT JOIN(SELECT news_id, count(news_id) AS count_comm 
+          FROM comments GROUP BY news_id) b
           ON b.news_id = news.id Order BY count_comm DESC limit 5';
         $stmt = $this->db->prepare($query);
         $stmt->execute();
@@ -81,9 +87,9 @@ class Model_News extends Model
      */
     public function get_one_news($id)
     {
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE id=:id';
+        $query = 'SELECT * FROM ' . self::tableName() . ' WHERE id=:id';
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':id', $id[0]);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
         if ($result = $stmt->fetch()) {
             return $result;
@@ -101,7 +107,7 @@ class Model_News extends Model
      */
     public function insert_news($author, $name, $text)
     {
-        $query = 'INSERT INTO ' . $this->table . ' (author, name, text) VALUES(:author, :name, :text)';
+        $query = 'INSERT INTO ' . self::tableName() . ' (author, name, text) VALUES(:author, :name, :text)';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':author', $author);
         $stmt->bindParam(':name', $name);

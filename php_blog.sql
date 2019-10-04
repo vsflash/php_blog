@@ -1,83 +1,120 @@
--- MySQL dump 10.13  Distrib 5.7.25, for Linux (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 4.8.0.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: php_blog
--- ------------------------------------------------------
--- Server version	5.7.25-0ubuntu0.18.04.2
+-- Хост: localhost
+-- Время создания: Окт 04 2019 г., 13:18
+-- Версия сервера: 10.1.32-MariaDB
+-- Версия PHP: 7.2.5
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `comments`
+-- База данных: `php_blog`
 --
 
-DROP TABLE IF EXISTS `comments`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `comments`
+--
+
 CREATE TABLE `comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `author` varchar(255) NOT NULL,
   `news_id` int(11) NOT NULL,
   `comm` varchar(255) NOT NULL,
-  `date_d` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `news_id_idx` (`news_id`),
-  CONSTRAINT `news_id` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `date_d` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `comments`
+-- Дамп данных таблицы `comments`
 --
 
-LOCK TABLES `comments` WRITE;
-/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,'Vadim',1,'test','2019-03-26 21:13:24'),(2,'Ð¡ÐµÑ€Ð³ÐµÐ¹',1,'good news','2019-03-26 21:34:47'),(3,'Ivan',2,'Test','2019-03-27 05:37:10'),(4,'Frenk',2,'test','2019-03-27 05:37:21'),(5,'Igor',2,'lk;fske;flse;flksel;fklsejflsefelfsejlf','2019-03-27 05:37:38'),(6,'Ivan',3,'efsefsefsefs','2019-03-27 05:38:09'),(7,'fsefsefsefsef',3,'Reresefsefs','2019-03-27 05:38:20'),(8,'Igor',4,'fsefsefsef','2019-03-27 05:38:33'),(9,'Rslan',4,'lvsjsklefjsefsekfjl','2019-03-27 05:38:43'),(10,'Oleg',4,'kklevksnvlsenvlksn','2019-03-27 05:39:41'),(11,'Iva',6,'','2019-03-27 05:39:58'),(12,'edesded',6,'addadawaw','2019-03-27 05:40:07');
-/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `comments` (`id`, `author`, `news_id`, `comm`, `date_d`) VALUES
+(1, 'Bill', 1, 'Good!!!', '2019-10-04 10:47:50'),
+(2, 'Mark', 4, 'Very interesting', '2019-10-04 10:48:52'),
+(3, 'Linus', 1, 'Nice', '2019-10-04 10:51:03');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `news`
+-- Структура таблицы `news`
 --
 
-DROP TABLE IF EXISTS `news`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `news` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `author` varchar(255) NOT NULL,
   `date_d` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `name` varchar(255) NOT NULL,
-  `text` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `text` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `news`
+-- Дамп данных таблицы `news`
 --
 
-LOCK TABLES `news` WRITE;
-/*!40000 ALTER TABLE `news` DISABLE KEYS */;
-INSERT INTO `news` VALUES (1,'vasiliy','2019-03-24 20:42:07','article_name','Michael Avenatti, the lawyer best known for representing Stormy Daniels in her lawsuits against President Trump, was arrested Monday as federal prosecutors filed charges accusing him of attempting to extort millions of dollars from Nike by threatening negative publicity right before an earnings call and the N.C.A.A. men’s basketball tournament.\n\nIn court documents filed Monday, federal prosecutors in Manhattan said that Mr. Avenatti and a client, a former travel team basketball coach, told Nike that they had evidence Nike employees had funneled money to recruits. The prosecutors said the men threatened to release the evidence in order to damage Nike’s reputation and market capitalization unless the company paid them at least $22.5 million.\n\nMr. Avenatti attempted to extract the money “by threatening to use his ability to garner publicity to inflict substantial financial and reputational harm on the company if his demands were not met,” prosecutors said in a statement.'),(2,'vasiliy','2019-03-24 20:42:07','article_name','lorem ipsum'),(3,'vasiliy','2019-03-24 20:42:07','article_name','lorem ipsum'),(4,'vasiliy','2019-03-24 20:42:07','article_name','lorem ipsum'),(5,'vasiliy','2019-03-24 20:42:07','article_name','lorem ipsum'),(6,'vasiliy','2019-03-25 19:23:27','article_name','lorem ipsum'),(7,'vasiliy','2019-03-25 19:26:00','article_name','lorem ipsum'),(8,'vasiliy','2019-03-25 19:26:11','article_name','lorem ipsum'),(9,'vasiliy','2019-03-25 19:26:13','article_name','lorem ipsum'),(10,'Vadim','2019-03-25 19:34:36','drgd','jjknln'),(11,'Vadim','2019-03-25 19:35:46','First news','effsefsef'),(12,'Vadim','2019-03-25 19:38:30','Second news','effsefsef'),(13,'Vadim','2019-03-25 19:39:22','Second news','Генсек НАТО Йенс Столтенберг заявил, что альянс планирует построить в Польше объект для хранения военной техники США. Возведение базы начнется уже летом и продолжится около двух лет. Стоимость проекта оценивается в $260 млн На объекте, по словам Столтенберга, планируется хранить американские бронированные машины, вооружения и боеприпасы. \"Это показывает, как близко мы работаем с США\", — сказал он. И добавил: база требуется \"для укрепления расширившегося присутствия США в Польше\". Об этом сообщает Рамблер. Далее: https://news.rambler.ru/troops/41918556/?utm_content=rnews&utm_medium=read_more&utm_source=copylink'),(14,'Vadim','2019-03-25 19:39:36','sesfsefes','sefsefsef'),(15,'sefsefse','2019-03-25 19:40:15','efsefse','sefsefse'),(16,'gxxfgfgx','2019-03-25 19:41:27','drgd','xgxgxfgx'),(17,'gxxfgfgx','2019-03-25 19:45:57','drgd','xgxgxfgx'),(18,'gxxfgfgx','2019-03-25 19:47:01','drgd','xgxgxfgx'),(19,'Sergey','2019-03-25 19:48:11','test','lks;fkoefks;ofs;ofk'),(20,'Ivan','2019-03-25 19:50:25','jlfjskfjeklf','kefjlsekfjklsefjkl'),(21,'Igor','2019-03-25 20:58:47','First news','111'),(22,'OLGA','2019-03-25 21:29:40',';lf;lsf;lsef;lk',';ls;lefs;lefslefs;lef'),(23,'Bob','2019-03-27 13:23:12','test','ljsljsldfjsklf');
-/*!40000 ALTER TABLE `news` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `news` (`id`, `author`, `date_d`, `name`, `text`) VALUES
+(1, 'DOU', '2019-10-04 10:42:19', 'Генерація SQL-запиту засобами MySQL-сервера', 'Ще далекого 2015 року в СКБД MySQL, починаючи з версії 5.7.8, додали підтримання нового типу даних JSON. Насамперед це створило нові можливості для роботи з даними, які з тих чи інших причин не потребують нормалізації. Однак мене це нововведення більше зацікавило суттєвим розширенням можливостей взаємодії зі збереженими процедурами.\n\nЗазвичай, при роботі з БД за класичною архітектурою «клієнт-сервер», створення запиту відбувається на стороні клієнта. А коли він вже остаточно сформований — відправляється на сервер для виконання. Такий підхід надає клієнту максимальну гнучкість для роботи з базою даних, але він має і недоліки.\n\nОдин з недоліків такого підходу в тому, що парадигма програмування в середовищі клієнта дуже сильно відрізняється від тієї, що використовуються в СКБД. Звичайно ж, з технічної точки зору, сформувати в клієнті текстовий рядок, навіть з дуже складним SQL-запитом, не є непосильним завданням. Та зі сторони це виглядає доволі неприродно, особливо коли доводиться використовувати умовні конструкції в клієнті, наприклад, з об’єктно-орієнтованою парадигмою. А вам ще до того ж необхідно в цей запит додати безліч різноманітних даних, як то значення поля чи фільтра для відбору.'),
+(2, 'DOU', '2019-10-04 10:43:36', 'Как учить иностранный язык так, чтобы заговорить на нем', 'Я работаю IT-инженером больше 10 лет, часть из которых пришлась на командировки (от недели до полугода), а часть — на постоянное проживание за рубежом. Кроме этого, в аутсорс-проектах я повсеместно замечал, как пробелы в активном языке мешали людям выражать свои мысли, отстаивать технически верные решения, понимать заказчика.\n\nЭта статья — тезисы моего личного опыта прикладного изучения иностранных языков:\n\nАнглийский — после 10-летнего перерыва с момента окончания школы за 6 месяцев до возможности смотреть фильмы в оригинале и общаться с заказчиком. Я тратил около часа в день плюс одно групповое занятие (60 мин.) в неделю в IT-компании.\nИспанский — с нуля за 4 месяца до возможности читать адаптированную литературу, понимать на слух песни, общаться с испаноязычными туристами. Мне понадобилось также около часа в день, но в этом случае дополнительно одно индивидуальное занятие (60 мин.) в неделю.\nДатский — с нуля за 8 месяцев до возможности по телефону записаться к врачу, говорить с госслужащими, читать рабочие письма или сообщения из детского сада. Сейчас я трачу около часа в день и прохожу одно групповое занятие (120 мин.) в неделю.\nЭти методы помогли заговорить мне и, надеюсь, помогут вам.'),
+(3, 'habr', '2019-10-04 10:45:18', 'PHP Xdebug proxy: когда стандартных возможностей Xdebug не хватает', 'Для отладки PHP-программ часто используют Xdebug. Однако стандартных возможностей IDE и Xdebug не всегда достаточно. Часть проблем можно решить с помощью Xdebug proxy — pydbgpproxy, но всё же не все. Поэтому я реализовал PHP Xdebug proxy на базе асинхронного фреймворка amphp.\n\n\nПод катом я расскажу, что не так с pydbgpproxy, чего в нём не хватает и почему я не стал его дорабатывать. Также объясню, как работает PHP Xdebug proxy, и покажу на примере, как его расширять.'),
+(4, 'habr', '2019-10-04 10:46:59', 'Fasttext на PHP\\Python. Первые шаги', 'Уже достаточно давно популярность набрали разного рода алгоритмы машинного обучения. Также, благодаря крупным компаниям, которые двигают технологический прогресс, появилось много opensource продуктов. Одним из них является Fasttext, о котором пойдет речь ниже.\n\nFasttext — разработка от Facebook. Основная задача программы — классификация текста. Классификация текста может понадобиться для:\n\nобъединение текстовой информации в группы по «похожести» (новости на одну тему )\nгруппировка текста со схожей тематикой в одну группу (новости про автомобили)\nпоиск информации, которая может являться спамом\nпоиск кликбэйтовой информации\n...\n\nВариантов, на самом деле, очень много и перечислять все нет смысла, идея должна быть понятна.'),
+(5, 'Virus', '2019-10-04 10:52:30', 'Test', '<script>prompt(\'Ente Your name:\');</script>'),
+(6, 'Virus;drop table comments', '2019-10-04 10:55:58', 'Test2', 'test');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `news_id_idx` (`news_id`);
+
+--
+-- Индексы таблицы `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT для таблицы `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `news_id` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2019-03-27 15:35:55

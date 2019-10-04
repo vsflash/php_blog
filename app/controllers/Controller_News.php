@@ -41,9 +41,9 @@ class Controller_News extends Controller
      */
     public function action_view($id)
     {
-        $this->view->comments = $this->model_comment->get_news_comments($id);
-        $this->view->count_comments = $this->model_comment->get_news_count_comments($id);
-        $this->view->one_news = $this->model_news->get_one_news($id);
+        $this->view->comments = $this->model_comment->get_news_comments($id[0]);
+        $this->view->count_comments = $this->model_comment->get_news_count_comments($id[0]);
+        $this->view->one_news = $this->model_news->get_one_news($id[0]);
         $this->view->content_view = 'main/news_view.php';
         $this->view->render();
     }

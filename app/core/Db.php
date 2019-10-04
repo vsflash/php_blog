@@ -23,19 +23,22 @@ class Db
     }
 
     /**
-     * @return PDO
+     * Get instance
+     * @param $dsn
+     * @param $username
+     * @param $password
+     * @return null|PDO
      */
-    public static function getInstance()
+    public static function getInstance($dsn, $username, $password)
     {
         if (self::$_instance != null) {
             return self::$_instance;
         }
 
-        $params = require 'app/config/db.php';
         return self::$_instance = new PDO(
-            $params['dsn'],
-            $params['username'],
-            $params['password'],
+            $dsn,
+            $username,
+            $password,
             [
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"
             ]

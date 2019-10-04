@@ -2,12 +2,19 @@
 
 namespace app\models;
 
+use app\core\Db;
 use app\core\Model;
 
 class Model_Comment extends Model
 {
 
-    protected $table = 'comments';
+    /**
+     * @return string
+     */
+    public static function tableName()
+    {
+        return 'comments';
+    }
 
     /**
      * Model_Comment constructor.
@@ -24,9 +31,9 @@ class Model_Comment extends Model
      */
     public function get_news_comments($news_id)
     {
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE news_id=:news_id';
+        $query = 'SELECT * FROM ' . self::tableName() . ' WHERE news_id=:news_id';
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':news_id', $news_id[0]);
+        $stmt->bindParam(':news_id', $news_id);
         $stmt->execute();
         if ($result = $stmt->fetchAll()) {
             return $result;
@@ -42,7 +49,7 @@ class Model_Comment extends Model
      */
     public function get_news_count_comments($news_id)
     {
-        $query = 'SELECT count(id) FROM ' . $this->table . ' WHERE news_id=:news_id';
+        $query = 'SELECT count(id) FROM ' . self::tableName() . ' WHERE news_id=:news_id';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':news_id', $news_id);
         $stmt->execute();
@@ -62,7 +69,7 @@ class Model_Comment extends Model
      */
     public function insert_comment($author, $news_id, $comm)
     {
-        $query = 'INSERT INTO ' . $this->table . ' (author, news_id, comm) VALUE(:author, :news_id, :comm)';
+        $query = 'INSERT INTO ' . self::tableName() . ' (author, news_id, comm) VALUE(:author, :news_id, :comm)';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':author', $author);
         $stmt->bindParam(':news_id', $news_id);

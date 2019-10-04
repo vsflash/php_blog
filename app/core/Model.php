@@ -12,6 +12,8 @@ class Model
      */
     public function __construct()
     {
-        $this->db = Db::getInstance();
+        $params = require 'app/config/db.php';
+
+        $this->db = Db::getInstance($params['dsn'], $params['username'], $params['password']);
     }
 }

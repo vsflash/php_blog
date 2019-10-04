@@ -1,3 +1,3 @@
 # php_blog
 clone project
-create db php_blog
+create db from dump php_blog.sql
