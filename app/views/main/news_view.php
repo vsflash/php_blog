@@ -5,10 +5,10 @@ if ($this->one_news): ?>
             <div class="row">
                 <div class="card col-sm-12" style="background-color: ghostwhite;">
                     <div class="card-body">
-                        <h5 class="card-title"><strong><?= $this->one_news['name'] ?></strong></h5>
-                        <p class="card-text"><?= $this->one_news['text'] ?></p>
-                        <p class="card-text"><strong>Автор: <?= $this->one_news['author'] ?></strong></p>
-                        <p class="card-text"><strong>Дата публикации: <?= $this->one_news['date_d'] ?></strong></p>
+                        <h5 class="card-title"><strong><?= htmlspecialchars($this->one_news['name'], ENT_QUOTES | ENT_SUBSTITUTE) ?></strong></h5>
+                        <p class="card-text"><?= htmlspecialchars($this->one_news['text'], ENT_QUOTES | ENT_SUBSTITUTE) ?></p>
+                        <p class="card-text"><strong>Автор: <?= htmlspecialchars($this->one_news['author'], ENT_QUOTES | ENT_SUBSTITUTE) ?></strong></p>
+                        <p class="card-text"><strong>Дата публикации: <?= htmlspecialchars($this->one_news['date_d'], ENT_QUOTES | ENT_SUBSTITUTE) ?></strong></p>
                     </div>
                 </div>
             </div>
@@ -17,17 +17,23 @@ if ($this->one_news): ?>
             <div class="row">
                 <div class="card col-sm-12" style="background-color: darkgray;">
                     <div class="card-body">
-                        <h5 class="card-title"><strong>Комментарии: <?= $this->count_comments["count(id)"] ?></strong></h5>
+                        <h5 class="card-title"><strong>Комментарии: <?= $this->count_comments["count(id)"] ?></strong>
+                        </h5>
 
-                        <?php foreach ($this->comments as $comment): ?>
-                            <div class="card col-sm-12" style="margin-top: 5px;background-color: darkgoldenrod;">
-                                <div class="card-body">
-                                    <p class="card-text"><?= $comment['comm'] ?></p>
-                                    <p class="card-text"><strong>Автор: <?= $comment['author'] ?></strong></p>
-                                    <p class="card-text"><strong>Дата добавления: <?= $news_item['date_d'] ?></strong></p>
+                        <?php if (!empty($this->comments)): ?>
+
+                            <?php foreach ($this->comments as $comment): ?>
+                                <div class="card col-sm-12" style="margin-top: 5px;background-color: darkgoldenrod;">
+                                    <div class="card-body">
+                                        <p class="card-text"><?= htmlspecialchars($comment['comm'], ENT_QUOTES | ENT_SUBSTITUTE) ?></p>
+                                        <p class="card-text"><strong>Автор: <?= htmlspecialchars($comment['author'], ENT_QUOTES | ENT_SUBSTITUTE) ?></strong></p>
+                                        <p class="card-text"><strong>Дата
+                                                добавления: <?= htmlspecialchars($comment['date_d'], ENT_QUOTES | ENT_SUBSTITUTE) ?></strong></p>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
 
                     </div>
                 </div>
@@ -59,5 +65,6 @@ if ($this->one_news): ?>
             </div>
         </div>
     </div>
+
 <?php
 endif;

@@ -15,7 +15,10 @@ abstract class Controller {
      * @var View
      */
     public $view;
-//
+
+    /**
+     * Controller constructor.
+     */
     public function __construct() {
         $this->view = new View();
     }

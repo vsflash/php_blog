@@ -40,6 +40,8 @@
         }
         .content {
             background-color: slategray;
+            min-height: 800px;
+            padding-bottom: 10px;
         }
         .slider-content {
             margin: auto;
@@ -87,7 +89,6 @@
                                                              class="fa fa-google-plus-square fa-3x social"></i></a>
         <a href="mailto:bootsnipp@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
     </div>
-    <hr>
 </div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"

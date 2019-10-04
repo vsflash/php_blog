@@ -7,9 +7,16 @@ use app\models\Model_News;
 use app\models\Model_Comment;
 use app\core\Route;
 
-class Controller_News extends Controller {
+class Controller_News extends Controller
+{
 
-    public function __construct() {
+    public $model_news;
+    public $model_comment;
+    /**
+     * Controller_News constructor.
+     */
+    public function __construct()
+    {
         parent::__construct();
 
         $this->model_news = new Model_News();
@@ -20,17 +27,20 @@ class Controller_News extends Controller {
     /**
      * Render all news
      */
-    public function action_index() {
+    public function action_index()
+    {
         $this->view->all_news = $this->model_news->get_all_news_with_count_comments();
         $this->view->most_commented = $this->model_news->get_most_commented_news();
         $this->view->content_view = 'main/news_index.php';
         $this->view->render();
     }
 
-    /**Render one news
+    /**
+     * Render one news
      * @param $id
      */
-    public function action_view($id) {
+    public function action_view($id)
+    {
         $this->view->comments = $this->model_comment->get_news_comments($id);
         $this->view->count_comments = $this->model_comment->get_news_count_comments($id);
         $this->view->one_news = $this->model_news->get_one_news($id);
@@ -41,19 +51,19 @@ class Controller_News extends Controller {
     /**
      * Create news
      */
-    public function action_create() {
+    public function action_create()
+    {
         $name = $_POST['name'];
         $author = $_POST['author'];
         $text = $_POST['textNews'];
         return $this->model_news->insert_news($author, $name, $text);
-//        Route::redirect('/news');
     }
 
     /**
      * Add comment
      */
-    public function action_add_comment() {
-        var_dump($_POST);
+    public function action_add_comment()
+    {
         $news_id = $_POST['news_id'];
         $comm = $_POST['comm'];
         $author = $_POST['author'];

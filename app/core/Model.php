@@ -2,21 +2,16 @@
 
 namespace app\core;
 
-use \PDO;
-
-abstract class Model {
+class Model
+{
 
     protected $db;
 
     /**
-     *
-     * @var PDO
+     * Model constructor.
      */
-    public function __construct() {
-        $host = 'localhost';
-        $user = 'root';
-        $password = 'root';
-        $db = 'php_blog';
-        $this->db = new PDO('mysql:host='.$host.';dbname='.$db, $user, $password);
+    public function __construct()
+    {
+        $this->db = Db::getInstance();
     }
 }
